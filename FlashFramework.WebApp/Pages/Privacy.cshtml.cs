@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace FlashFramework.Pages
+namespace FlashFramework.WebApp.Pages
 {
     public class PrivacyModel : PageModel
     {

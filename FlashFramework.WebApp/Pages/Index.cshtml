@@ -1,0 +1,37 @@
+﻿@page
+@using FlashFramework.Shared.Models;
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<p>
+    <h5 class="display-6">There are @Model.Modules.Count() modules</h5>
+    <ul>
+        @foreach (var module in Model.Modules)
+        {
+            <li>@module.Name: @module.Pages.Count() pages, @module.IndexComponents.Count() components</li>
+        }
+    </ul>
+</p>
+
+<div>
+    <h5 class="display-6">Dynamic components</h5>
+    @foreach (var component in Model.Modules.SelectMany(m => m.IndexComponents))
+    {
+        <div>
+            @{
+                var model = new IndexComponentModel
+                {
+                    Number = 1
+                };
+            }
+            @await Component.InvokeAsync(component.Name, model)
+        </div>
+    }
+</div>
