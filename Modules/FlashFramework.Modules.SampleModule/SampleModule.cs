@@ -1,7 +1,9 @@
-﻿using FlashFramework.Modules.SampleModule.Components.SampleComponent;
-using FlashFramework.Modules.SampleModule.Pages;
-using FlashFramework.Shared.Models;
+﻿using FlashFramework.Common.Models;
+using FlashFramework.Modules.SampleModule.Pages.Sample;
+using FlashFramework.Modules.SampleModule.Views.Shared.Components.SampleComponent;
 using FlashFramework.Shared.Modular;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FlashFramework.Modules.SampleModule
 {
@@ -18,5 +20,9 @@ namespace FlashFramework.Modules.SampleModule
         {
             new SampleComponent()
         };
+
+        public void InitializeServices(IServiceCollection services, IConfiguration configuration)
+        {
+        }
     }
 }

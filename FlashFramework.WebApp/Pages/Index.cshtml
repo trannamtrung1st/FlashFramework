@@ -1,5 +1,5 @@
 ﻿@page
-@using FlashFramework.Shared.Models;
+@using FlashFramework.Common.Models;
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -33,5 +33,38 @@
             }
             @await Component.InvokeAsync(component.Name, model)
         </div>
+    }
+</div>
+
+<div>
+    <h5 class="display-6">Test send email</h5>
+
+    @if (Model.HasEmailService)
+    {
+        <form method="post" asp-page-handler="SendEmail">
+            <div class="form-group">
+                <label asp-for="SendEmailModel.ToName">To Name</label>
+                <input class="form-control" asp-for="SendEmailModel.ToName" />
+            </div>
+            <div class="form-group">
+                <label asp-for="SendEmailModel.ToAddress">To Address</label>
+                <input class="form-control" asp-for="SendEmailModel.ToAddress" />
+            </div>
+            <div class="form-group">
+                <label asp-for="SendEmailModel.Subject">Subject</label>
+                <input class="form-control" asp-for="SendEmailModel.Subject" />
+            </div>
+            <div class="form-group">
+                <label asp-for="SendEmailModel.Body">Body</label>
+                <input class="form-control" asp-for="SendEmailModel.Body" />
+            </div>
+            <hr />
+            <p>@Model.SendEmailMessage</p>
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    }
+    else
+    {
+        <p>No email service available</p>
     }
 </div>

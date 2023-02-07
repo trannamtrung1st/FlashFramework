@@ -1,4 +1,7 @@
+using FlashFramework.Email.Services;
 using FlashFramework.WebApp.Extensions;
+using FlashFramework.WebApp.Services;
+using FlashFramework.WebApp.Utils;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,12 +10,12 @@ var configuration = builder.Configuration;
 // Add services to the container.
 var services = builder.Services;
 
-var moduleAssemblies = services.LoadModules(configuration);
+var modules = ModuleHelper.LoadModules(configuration);
 
 services.AddRazorPages()
     .ConfigureApplicationPartManager(apm =>
     {
-        foreach (var assembly in moduleAssemblies)
+        foreach (var assembly in modules)
         {
             var part = new AssemblyPart(assembly);
             var compiledPart = new CompiledRazorAssemblyPart(assembly);
@@ -20,6 +23,10 @@ services.AddRazorPages()
             apm.ApplicationParts.Add(compiledPart);
         }
     });
+
+services.AddSingleton<IEmailService, NullEmailService>();
+
+services.RegisterModules(modules, configuration);
 
 var app = builder.Build();
 

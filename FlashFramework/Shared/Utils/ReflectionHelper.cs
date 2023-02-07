@@ -43,7 +43,7 @@ namespace FlashFramework.Shared.Utils
                 }
                 catch (FileNotFoundException)
                 {
-                    var assembly = Assembly.LoadFile(assObj.Dll);
+                    var assembly = Assembly.LoadFrom(assObj.Dll);
                     allAssemblies.Add(assembly);
                 }
                 catch (FileLoadException) { }

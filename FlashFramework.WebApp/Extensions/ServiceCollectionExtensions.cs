@@ -6,33 +6,21 @@ namespace FlashFramework.WebApp.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IEnumerable<Assembly> LoadModules(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection RegisterModules(this IServiceCollection services,
+            IEnumerable<Assembly> modules, IConfiguration configuration)
         {
-            var modulesFolder = configuration["AppSettings__ModulesFolder"];
-            var moduleAssemblies = new List<Assembly>();
+            var moduleTypes = ReflectionHelper.GetAllTypesAssignableTo(typeof(IModule), modules);
 
-            if (Directory.Exists(modulesFolder))
+            foreach (var type in moduleTypes)
             {
-                var allModulesContainerFolders = Directory.GetDirectories(modulesFolder);
+                IModule module = (IModule)Activator.CreateInstance(type);
 
-                foreach (var folder in allModulesContainerFolders)
-                {
-                    var assemblies = ReflectionHelper.LoadAssemblies(
-                        directory: folder,
-                        searchPattern: "FlashFramework.Modules.*.dll").ToArray();
+                module.InitializeServices(services, configuration);
 
-                    moduleAssemblies.AddRange(assemblies);
-
-                    var moduleTypes = ReflectionHelper.GetAllTypesAssignableTo(typeof(IModule), assemblies);
-
-                    foreach (var type in moduleTypes)
-                    {
-                        services.AddSingleton(typeof(IModule), type);
-                    }
-                }
+                services.AddSingleton(typeof(IModule), module);
             }
 
-            return moduleAssemblies;
+            return services;
         }
     }
 }

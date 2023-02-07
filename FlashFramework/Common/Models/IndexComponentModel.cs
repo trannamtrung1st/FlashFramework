@@ -1,4 +1,4 @@
-﻿namespace FlashFramework.Shared.Models
+﻿namespace FlashFramework.Common.Models
 {
     public class IndexComponentModel
     {

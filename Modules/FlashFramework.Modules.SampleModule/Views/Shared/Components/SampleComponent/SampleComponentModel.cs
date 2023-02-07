@@ -1,4 +1,4 @@
-﻿namespace FlashFramework.Modules.SampleModule.Components.SampleComponent
+﻿namespace FlashFramework.Modules.SampleModule.Views.Shared.Components.SampleComponent
 {
     public class SampleComponentModel
     {

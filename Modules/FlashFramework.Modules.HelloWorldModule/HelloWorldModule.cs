@@ -1,6 +1,8 @@
-﻿using FlashFramework.Modules.HelloWorldModule.Components.HelloWorldComponent;
-using FlashFramework.Shared.Models;
+﻿using FlashFramework.Common.Models;
+using FlashFramework.Modules.HelloWorldModule.Views.Shared.Components.HelloWorldComponent;
 using FlashFramework.Shared.Modular;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FlashFramework.Modules.HelloWorldModule
 {
@@ -16,5 +18,9 @@ namespace FlashFramework.Modules.HelloWorldModule
         {
             new HelloWorldComponent()
         };
+
+        public void InitializeServices(IServiceCollection services, IConfiguration configuration)
+        {
+        }
     }
 }

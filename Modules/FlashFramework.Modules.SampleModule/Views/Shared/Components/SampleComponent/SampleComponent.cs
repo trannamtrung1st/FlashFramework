@@ -1,8 +1,8 @@
-﻿using FlashFramework.Shared.Models;
+﻿using FlashFramework.Common.Models;
 using FlashFramework.Shared.Modular;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FlashFramework.Modules.SampleModule.Components.SampleComponent
+namespace FlashFramework.Modules.SampleModule.Views.Shared.Components.SampleComponent
 {
     public class SampleComponent : ViewComponent, IComponent<IndexComponentModel>
     {

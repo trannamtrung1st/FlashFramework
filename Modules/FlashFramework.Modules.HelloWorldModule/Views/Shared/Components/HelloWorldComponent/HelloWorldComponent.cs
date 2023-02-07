@@ -1,8 +1,8 @@
-﻿using FlashFramework.Shared.Models;
+﻿using FlashFramework.Common.Models;
 using FlashFramework.Shared.Modular;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FlashFramework.Modules.HelloWorldModule.Components.HelloWorldComponent
+namespace FlashFramework.Modules.HelloWorldModule.Views.Shared.Components.HelloWorldComponent
 {
     public class HelloWorldComponent : ViewComponent, IComponent<IndexComponentModel>
     {
